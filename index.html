@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Image Generator</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; margin: 20px; }
+        input, button { margin: 10px; padding: 8px; }
+        img { max-width: 100%; height: auto; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <h1>Image Generator</h1>
+    <p>Enter a prompt to generate an image:</p>
+    <input type="text" id="prompt" placeholder="Type your prompt here..." />
+    <button onclick="generateImage()">Generate</button>
+    <div id="output"></div>
+
+    <script>
+        async function generateImage() {
+            const prompt = document.getElementById("prompt").value;
+            const output = document.getElementById("output");
+            output.innerHTML = "Generating image...";
+            try {
+                const response = await fetch("http://localhost:5000/generate", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ prompt })
+                });
+                const data = await response.json();
+                output.innerHTML = `<img src="${data.image_url}" alt="Generated Image" />`;
+            } catch (error) {
+                output.innerHTML = "Error generating image. Please try again.";
+            }
+        }
+    </script>
+</body>
+</html>
