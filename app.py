@@ -5,9 +5,8 @@ from flask_cors import CORS
 app = Flask(__name__)
 CORS(app, origins=["http://localhost:5500"])
 
-#API_KEY = "your_openai_api_key"
-API_KEY = "https://api.deepai.org/api/text2img"
-API_URL = "https://api.openai.com/v1/images/generations"
+API_KEY = "AIzaSyCYXWAwgW-_Apsbqa8fj4KGI98t_7z-AN4"
+#API_URL = "https://api.openai.com/v1/images/generations"
 
 @app.route('/generate', methods=['POST'])
 def generate_image():
